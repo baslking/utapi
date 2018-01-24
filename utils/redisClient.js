@@ -12,12 +12,13 @@ const Redis = require('ioredis');
 function redisClient(config, log) {
     const redisClient = new Redis(Object.assign({
         // disable offline queue
-        enableOfflineQueue: false,
+        enableOfflineQueue: true,
         // keep alive 3 seconds
         keepAlive: 3000,
     }, config));
-    redisClient.on('error', err => log.trace('error with redis client', {
-        error: err,
+    redisClient.on('error', err => log.errore('error with redis client', {
+        error: err.stack,
+	errMsg: err.message,
     }));
     return redisClient;
 }

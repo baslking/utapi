@@ -1,4 +1,4 @@
 const server = require('./lib/server.js');
 
-server();
+server({metrics:["buckets"]});
 
